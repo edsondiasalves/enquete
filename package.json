@@ -1,0 +1,13 @@
+{
+  "name": "enquete",
+  "version": "1.0.0",
+  "description": "Aplicativo de criação de enquetes públicas",
+  "author": "Edson Dias <edsondiasalves@hotmail.com>",
+  "license": "ISC",
+  "scripts":{
+      "start": "app.bat"
+  },
+  "repository": {
+    "url": "https://github.com/edsondiasalves/enquete"
+  }
+}

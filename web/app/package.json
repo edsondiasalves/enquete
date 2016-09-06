@@ -4,11 +4,15 @@
   "description": "Aplicativo de criação de enquetes públicas",
   "main": "app/index.html",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start": "lite-server"
   },
   "author": "Edson Dias <edsondiasalves@hotmail.com>",
   "license": "ISC",
   "devDependencies": {
-    "lite": "^3.0.9"
+    "lite-server": "^2.2.2"
+  },
+  "repository": {
+    "url": "https://github.com/edsondiasalves/enquete"
   }
 }

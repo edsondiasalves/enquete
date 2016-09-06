@@ -1,1 +1,2 @@
-web/node_modules
+web/app/node_modules
+web/app/bower_components

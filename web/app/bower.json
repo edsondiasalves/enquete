@@ -1,0 +1,23 @@
+{
+  "name": "enquete",
+  "description": "Aplicativo de criação de enquetes públicas",
+  "main": "app/index.html",
+  "authors": [
+    "Edson Dias <edsondiasalves@hotmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/edsondiasalves/enquete",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-ui": "^0.4.0",
+    "angular": "^1.5.8",
+    "angular-bootstrap": "^2.1.3",
+    "angular-route": "^1.5.8"
+  }
+}
