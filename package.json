@@ -1,7 +1,7 @@
 {
   "name": "enquete",
   "version": "1.0.0",
-  "description": "Aplicativo de criação de enquetes públicas",
+  "description": "Quiz creation app",
   "main": "app/index.html",
   "scripts": {
     "test": "test",

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="app">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,18 +11,22 @@
     <title>Enquete</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="app/assets/css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="bower_components/angular-ui/build/angular-ui.min.css" rel="stylesheet">
-    <link href="bower_components/angular-ui/build/angular-ui.min.css" rel="stylesheet">
-    
     <!-- Custom CSS -->
-    <link href="app/assets/css/3-col-portfolio.css" rel="stylesheet">
+    <link href="assets/css/3-col-portfolio.css" rel="stylesheet">
 
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
     <script src="bower_components/angular-route/angular-route.min.js"></script>
     <script src="bower_components/angular-ui/build/angular-ui.min.js"></script>
+
+    <!-- Modules -->
+    <script src="app/app.module.js"></script>
+    <script src="app/app.routes.js"></script>
+
+    <!-- Controllers -->
+    <script src="app/controllers/home.controller.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -69,154 +74,8 @@
     <!-- Page Content -->
     <div class="container">
 
-        <!-- Page Header -->
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">Enquete
-                    <small>Enquetes populares</small>
-                </h1>
-            </div>
-        </div>
-        <!-- /.row -->
+        <div ng-view></div>
 
-        <!-- Projects Row -->
-        <div class="row">
-            <div class="col-md-4 portfolio-item">
-                <a href="">
-                    <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-                </a>
-                <h3>
-                    <a href="">Project Name</a>
-                </h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna
-                    varius vitae.</p>
-            </div>
-            <div class="col-md-4 portfolio-item">
-                <a href="">
-                    <div style="width:350px; height:200px; background-color:gray;">
-
-                    </div>
-                </a>
-                <h3>
-                    <a href="">Project Name</a>
-                </h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna
-                    varius vitae.</p>
-            </div>
-            <div class="col-md-4 portfolio-item">
-                <a href="">
-                    <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-                </a>
-                <h3>
-                    <a href="">Project Name</a>
-                </h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna
-                    varius vitae.</p>
-            </div>
-        </div>
-        <!-- /.row -->
-
-        <!-- Projects Row -->
-        <div class="row">
-            <div class="col-md-4 portfolio-item">
-                <a href="">
-                    <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-                </a>
-                <h3>
-                    <a href="">Project Name</a>
-                </h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna
-                    varius vitae.</p>
-            </div>
-            <div class="col-md-4 portfolio-item">
-                <a href="">
-                    <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-                </a>
-                <h3>
-                    <a href="">Project Name</a>
-                </h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna
-                    varius vitae.</p>
-            </div>
-            <div class="col-md-4 portfolio-item">
-                <a href="">
-                    <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-                </a>
-                <h3>
-                    <a href="">Project Name</a>
-                </h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna
-                    varius vitae.</p>
-            </div>
-        </div>
-
-        <!-- Projects Row -->
-        <div class="row">
-            <div class="col-md-4 portfolio-item">
-                <a href="">
-                    <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-                </a>
-                <h3>
-                    <a href="">Project Name</a>
-                </h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna
-                    varius vitae.</p>
-            </div>
-            <div class="col-md-4 portfolio-item">
-                <a href="">
-                    <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-                </a>
-                <h3>
-                    <a href="">Project Name</a>
-                </h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna
-                    varius vitae.</p>
-            </div>
-            <div class="col-md-4 portfolio-item">
-                <a href="">
-                    <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-                </a>
-                <h3>
-                    <a href="">Project Name</a>
-                </h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna
-                    varius vitae.</p>
-            </div>
-        </div>
-        <!-- /.row -->
-
-        <hr>
-
-        <!-- Pagination -->
-        <div class="row text-center">
-            <div class="col-lg-12">
-                <ul class="pagination">
-                    <li>
-                        <a href="">&laquo;</a>
-                    </li>
-                    <li class="active">
-                        <a href="">1</a>
-                    </li>
-                    <li>
-                        <a href="">2</a>
-                    </li>
-                    <li>
-                        <a href="">3</a>
-                    </li>
-                    <li>
-                        <a href="">4</a>
-                    </li>
-                    <li>
-                        <a href="">5</a>
-                    </li>
-                    <li>
-                        <a href="">&raquo;</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- /.row -->
-        <hr>
         <!-- Footer -->
         <footer>
             <div class="row">
@@ -229,4 +88,5 @@
     </div>
     <!-- /.container -->
 </body>
+
 </html>
