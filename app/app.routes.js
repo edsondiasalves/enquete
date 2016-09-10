@@ -9,10 +9,10 @@ angular.module('app')
         $stateProvider
             .state('home', {
                 url: '/home',
-                templateUrl: 'app/views/home.html'
+                templateUrl: 'views/home.html'
             })
             .state('create', {
                 url: '/create',
-                templateUrl: 'app/views/create.html'
+                templateUrl: 'views/create.html'
             })
     });

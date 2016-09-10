@@ -1,0 +1,8 @@
+{
+  "hosting": {
+    "public": "app"
+  },
+  "database": {
+    "rules": "enquete.rules.json"
+  }
+}
