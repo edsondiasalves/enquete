@@ -4,7 +4,7 @@
   "description": "Quiz creation app",
   "main": "app/index.html",
   "scripts": {
-    "test": "test",
+    "test": "karma start",
     "start": "lite-server"
   },
   "author": "Edson Dias <edsondiasalves@hotmail.com>",
