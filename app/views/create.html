@@ -1,33 +1,48 @@
 <div class="col-md-6" ng-controller="createController" >
     <h1>Criar Enquete</h1>
-    <form>
+    <ng-form name="frmQuiz">
         <div class="form-group">
             <label for="tittle">Título</label>
-            <input type="text" class="form-control" id="title" placeholder="Titulo da enquete" 
-                    ng-model="quiz.title" >
+            <input type="text" class="form-control" name="title" placeholder="Titulo da enquete" 
+                    ng-model="quiz.title" required minlength="10" >
+            <div ng-show="frmQuiz.title.$dirty && !frmQuiz.title.$valid">
+                <div ng-show="frmQuiz.title.$error.required" style="color:maroon" role="alert">
+                    <div ng-message="required">O título é obrigatório</div>
+                </div>
+                <div ng-show="frmQuiz.title.$error.minlength" style="color:maroon" role="alert">
+                    <div ng-message="required">O título deve ter pelo menos 10 letras</div>
+                </div>
+            </div>
         </div>
         <div class="form-group">
             <label for="description">Descrição:</label>
-            <textarea class="form-control" rows="5" id="description" placeholder="Descrição da enquete" 
-                ng-model="quiz.description"></textarea>
+            <textarea class="form-control" rows="5" name="description" placeholder="Descrição da enquete" 
+                ng-model="quiz.description" required minlength="30"></textarea>
+            <div ng-show="frmQuiz.description.$dirty && !frmQuiz.description.$valid">
+                <div ng-show="frmQuiz.description.$error.required" style="color:maroon" role="alert">
+                    <div ng-message="required">A descrição é obrigatória</div>
+                </div>
+                <div ng-show="frmQuiz.description.$error.minlength" style="color:maroon" role="alert">
+                    <div ng-message="required">O descrição deve ter pelo menos 30 letras</div>
+                </div>
+            </div>
         </div>
         <div class="form-group">
             <label for="description">Opções:</label>
             <input type="text" class="form-control" ng-repeat="opt in quiz.options" 
                 placeholder="{{ 'Opção ' + opt.id }}" 
-                ng-model="opt.desc">
+                ng-model="opt.desc" required>
         </div>
         <div class="text-right">
-            <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="addOption()">
-                <span class="glyphicon glyphicon-plus text-right" </span> Adicionar
-            </button>
-            <button type="button" class="btn btn-default" aria-label="Left Align" 
-                ng-click="removeOption()" ng-disabled="quiz.options.length < 3" >
-                <span class="glyphicon glyphicon-minus text-right"></span> Remover
-            </button>
+            <a ng-click="addOption()" ng-hide="quiz.options.length > 4">
+                <span class="glyphicon glyphicon-plus text-right"> Adicionar</span> 
+            </a>
+            <a ng-click="removeOption()" ng-hide="quiz.options.length < 3">
+                <span class="glyphicon glyphicon-minus text-right"> Remover</span>
+            </a>
         </div>
         <div class="text-center">
-            <input type="submit" class="btn btn-default" value="Criar" ng-click="create()">
+            <input type="submit" class="btn btn-default" value="Criar Enquete" ng-disabled="!frmQuiz.$valid" ng-click="create()">
         </div>
     </form>
 </div>

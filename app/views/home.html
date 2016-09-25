@@ -12,13 +12,13 @@
     <!-- Projects Row -->
     <div class="row">
         <div class="col-md-4 portfolio-item" ng-repeat="quiz in quizzes">
-            <a href="">
-                <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-            </a>
-            <h3>
-                <a href=""></a>
-            </h3>
-            <p><span ng-bind="quiz.title"></span></p>
+            <p><strong><span ng-bind="quiz.title"></span></strong></p>
+            <p><span ng-bind="quiz.description"></span></p>
+            <ul>
+                <li ng-repeat="o in quiz.options">
+                    <span ng-bind="o"></span>
+                </li>
+            </ul>
         </div>
     </div>
     <!-- /.row -->

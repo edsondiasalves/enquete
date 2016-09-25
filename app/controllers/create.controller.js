@@ -21,27 +21,28 @@ function CreateController($scope, firebaseFactory) {
     }
 
     $scope.create = function () {
-        var enquetes = firebaseFactory.enquetesLista;
-        var novaEnquete =
-            {
-                "title": $scope.quiz.title,
-                "description": $scope.quiz.description,
-                "options": []
+        if ($scope.frmQuiz.$valid) {
+            var enquetes = firebaseFactory.enquetesLista;
+            var novaEnquete =
+                {
+                    "title": $scope.quiz.title,
+                    "description": $scope.quiz.description,
+                    "options": []
+                };
+
+            angular.forEach($scope.quiz.options, function (v) {
+                novaEnquete.options.push(v.desc)
+            });
+
+            enquetes.$add(novaEnquete);
+            $scope.frmQuiz.$setPristine();
+
+            $scope.quiz = {
+                options: [
+                    { id: 1, desc: "" },
+                    { id: 2, desc: "" }
+                ]
             };
-
-        angular.forEach($scope.quiz.options, function (v) {
-            novaEnquete.options.push(v.desc)
-        });
-
-        enquetes.$add(novaEnquete);
-
-        $scope.quiz = {
-            title: '',
-            description: '',
-            options: [
-                { id: 1, desc: "" },
-                { id: 2, desc: "" }
-            ]
-        };
+        }
     }
 }

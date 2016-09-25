@@ -18,7 +18,7 @@ function HomeController($scope, firebaseFactory) {
                     "id": i++,
                     "title": fireQuiz.title,
                     "description": fireQuiz.description,
-                    "image": "http://placehold.it/700x400"
+                    "options": fireQuiz.options
                 };
                 $scope.quizzes.push(quiz);
             });
