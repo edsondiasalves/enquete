@@ -1,6 +1,11 @@
 {
   "rules": {
-    ".read": "auth != null",
-    ".write": "auth != null"
+    ".read": true,
+    ".write": true
+
+    // "quiz":{
+    //   ".read":true,
+    //   ".write":"newData.hasChildren(['title','description','options'])"
+    // }
   }
 }

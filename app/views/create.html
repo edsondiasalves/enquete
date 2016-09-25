@@ -3,16 +3,18 @@
     <form>
         <div class="form-group">
             <label for="tittle">Título</label>
-            <input type="text" class="form-control" id="title" placeholder="Titulo da enquete" ng-model="quiz.title" >
+            <input type="text" class="form-control" id="title" placeholder="Titulo da enquete" 
+                    ng-model="quiz.title" >
         </div>
         <div class="form-group">
             <label for="description">Descrição:</label>
-            <textarea class="form-control" rows="5" id="description" placeholder="Descrição da enquete" ng-model="quiz.description"></textarea>
+            <textarea class="form-control" rows="5" id="description" placeholder="Descrição da enquete" 
+                ng-model="quiz.description"></textarea>
         </div>
         <div class="form-group">
             <label for="description">Opções:</label>
             <input type="text" class="form-control" ng-repeat="opt in quiz.options" 
-                id="option1" placeholder="{{ 'Opção ' + opt.id }}" 
+                placeholder="{{ 'Opção ' + opt.id }}" 
                 ng-model="opt.desc">
         </div>
         <div class="text-right">

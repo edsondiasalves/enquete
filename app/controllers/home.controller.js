@@ -1,18 +1,28 @@
 angular.module('app')
-    .controller('homeController', ['$scope', HomeController]);
+    .controller('homeController', ['$scope', 'firebaseFactory', HomeController]);
 
-function HomeController($scope) {
+function HomeController($scope, firebaseFactory) {
+    
+    $scope.data = firebaseFactory.enquetes;
+    
+    var unwatch = firebaseFactory.enquetes.$watch(function () {
+        $scope.loadData();
+    });
 
-    var qtdQuizzes = 9;
-    $scope.quizzes = [];
-
-    for (i = 0; i < qtdQuizzes; i++) {
-        var quiz = {
-            "id": i,
-            "name": 'Project Name',
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.",
-            "image": "http://placehold.it/700x400"
-        };
-        $scope.quizzes.push(quiz);
+    $scope.loadData = function () {
+        firebaseFactory.enquetes.$loaded().then(function () {
+            $scope.quizzes = [];
+            angular.forEach(firebaseFactory.enquetes, function (fireQuiz) {
+                var i = 0;
+                var quiz = {
+                    "id": i++,
+                    "title": fireQuiz.title,
+                    "description": fireQuiz.description,
+                    "image": "http://placehold.it/700x400"
+                };
+                $scope.quizzes.push(quiz);
+            });
+        });
     }
+    $scope.loadData();
 }
