@@ -2,6 +2,10 @@
     background-color: #fbe3e4;
 }
 
+.ng-invalid-minlength .ng-dirty {
+    background-color: #fbe3e4;
+}
+
 .ng-dirty .ng-valid {
     background-color: #faffbd;
 }
