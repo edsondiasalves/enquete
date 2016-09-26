@@ -16,10 +16,12 @@ function FirebaseFactory($firebaseObject, $firebaseArray, $firebaseAuth) {
     var refEnquetes = firebase.database().ref().child('enquetes');
 
     var data = $firebaseObject(refData);
+    var dataLista = $firebaseArray(refData);
     var enquetes = $firebaseObject(refEnquetes);
     var enquetesLista = $firebaseArray(refEnquetes);
 
     return {
+        dataLista: dataLista,
         enquetes: enquetes,
         enquetesLista: enquetesLista, 
         auth: auth

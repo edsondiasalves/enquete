@@ -16,5 +16,8 @@
   },
   "repository": {
     "url": "https://github.com/edsondiasalves/enquete"
+  },
+  "dependencies": {
+    "angular-ui-bootstrap": "^2.1.4"
   }
 }

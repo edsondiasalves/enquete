@@ -34,15 +34,16 @@ function CreateController($scope, firebaseFactory) {
                 novaEnquete.options.push(v.desc)
             });
 
-            enquetes.$add(novaEnquete);
-            $scope.frmQuiz.$setPristine();
+            enquetes.$add(novaEnquete).then(function (ref) {
+                $scope.frmQuiz.$setPristine();
 
-            $scope.quiz = {
-                options: [
-                    { id: 1, desc: "" },
-                    { id: 2, desc: "" }
-                ]
-            };
+                $scope.quiz = {
+                    options: [
+                        { id: 1, desc: "" },
+                        { id: 2, desc: "" }
+                    ]
+                };
+            });
         }
     }
 }
