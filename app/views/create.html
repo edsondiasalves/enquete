@@ -1,5 +1,9 @@
-<div class="col-md-6" ng-controller="createController" >
+<div class="col-md-offset-3 col-md-6" ng-controller="createController" >
     <h1>Criar Enquete</h1>
+    <div uib-alert ng-repeat="alert in alerts" 
+        ng-class="'alert-' + (alert.type || 'warning')" dismiss-on-timeout="5000"
+        close="closeAlert($index)">{{alert.msg}}
+    </div>
     <ng-form name="frmQuiz">
         <div class="form-group">
             <label for="tittle">Título</label>
@@ -42,7 +46,8 @@
             </a>
         </div>
         <div class="text-center">
-            <input type="submit" class="btn btn-default" value="Criar Enquete" ng-disabled="!frmQuiz.$valid" ng-click="create()">
+            <input type="submit" class="btn btn-lg btn-primary" value="Criar Enquete" 
+                ng-disabled="!frmQuiz.$valid" ng-click="create()">
         </div>
-    </form>
+    </ng-form>
 </div>

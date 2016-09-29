@@ -1,11 +1,12 @@
 {
   "rules": {
-    ".read": true,
-    ".write": true
-
-    // "quiz":{
-    //   ".read":true,
-    //   ".write":"newData.hasChildren(['title','description','options'])"
-    // }
+  	".read":true,
+    "enquetes":{
+      ".read":true,
+			"quizzes":{
+        ".read":true,
+        ".write": "auth !== null"
+      }
+    } 
   }
 }

@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="col-md-offset-3 col-md-6">
+        <form  class="form-signin">
+            <ng-form name="frmLogin">
+                <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" 
+                    dismiss-on-timeout="5000" close="closeAlert($index)">{{alert.msg}}
+                </div>
+                <h2 class="form-signin-heading">Login</h2>
+                <label for="inputEmail" class="sr-only">E-mail</label>
+                <input type="email" ng-model="inputEmail" class="form-control" placeholder="E-mail" required autofocus>
+                <label for="inputPassword" class="sr-only">Senha</label>
+                <input type="password" ng-model="inputPassword" class="form-control" placeholder="Senha" required minlength="6">
+                <div class="checkbox">
+                    <label>
+                    <input type="checkbox" value="remember-me"> Lembrar-me
+                </label>
+                    <div class='text-right'>
+                        <a ui-sref="createUser">Crie uma conta</a>
+                    </div>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" ng-click="login()">Login</button>
+            </form>
+        </form>
+    </div>
+</div>
