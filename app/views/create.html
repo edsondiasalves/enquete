@@ -34,8 +34,7 @@
         <div class="form-group">
             <label for="description">Opções:</label>
             <input type="text" class="form-control" ng-repeat="opt in quiz.options" 
-                placeholder="{{ 'Opção ' + opt.id }}" 
-                ng-model="opt.desc" required>
+                placeholder="{{ 'Opção ' + opt.id }}" ng-model="opt.desc" required>
         </div>
         <div class="text-right">
             <a ng-click="addOption()" ng-hide="quiz.options.length > 4">

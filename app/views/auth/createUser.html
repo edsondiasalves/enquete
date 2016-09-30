@@ -7,15 +7,43 @@
                 </div>
                 <h2 class="form-signin-heading">Criar Usuário</h2>
                 <label for="inputEmail" class="sr-only">E-mail</label>
-                <input type="email" ng-model="inputEmail" class="form-control" placeholder="E-mail" required autofocus>
-                
+                <input type="email" ng-model="inputEmail" name="inputEmail" class="form-control" placeholder="E-mail" required autofocus>
+                <div ng-show="frmCreateUser.inputEmail.$dirty && !frmCreateUser.inputEmail.$valid">
+                    <div ng-show="frmCreateUser.inputEmail.$error.email" style="color:maroon" role="alert">
+                        <div ng-message="required">Digite um e-mail válido.</div>
+                    </div>
+                </div>
+
                 <label for="inputPassword" class="sr-only">Senha</label>
-                <input type="password" ng-model="inputPassword" class="form-control" placeholder="Senha" required minlength="6">
+                <input type="password" ng-model="inputPassword" name="inputPassword" class="form-control"  
+                    placeholder="Senha" required minlength="6">
+                <div ng-show="frmCreateUser.inputPassword.$dirty && !frmCreateUser.inputPassword.$valid">
+                    <div ng-show="frmCreateUser.inputPassword.$error.required" style="color:maroon" role="alert">
+                        <div ng-message="required">O campo é obrigatório.</div>
+                    </div>
+                    <div ng-show="frmCreateUser.inputPassword.$error.minlength" style="color:maroon" role="alert">
+                        <div ng-message="required">Campo com tamanho insuficiente.</div>
+                    </div>
+                </div>
                 
                 <label for="inputConfirm" class="sr-only">Confirmar Senha</label>
-                <input type="password" ng-model="inputConfirm" class="form-control" placeholder="Confirmar Senha" required minlength="6">
+                <input type="password" ng-model="inputConfirm" name="inputConfirm" class="form-control" 
+                    ui-validate="'$value==inputPassword'" ui-validator-watch='inputPassword'
+                    placeholder="Confirmar Senha" required minlength="6">
+                <div ng-show="frmCreateUser.inputConfirm.$dirty && !frmCreateUser.inputConfirm.$valid">
+                    <div ng-show="frmCreateUser.inputConfirm.$error.required" style="color:maroon" role="alert">
+                        <div ng-message="required">O campo é obrigatório.</div>
+                    </div>
+                    <div ng-show="frmCreateUser.inputConfirm.$error.minlength" style="color:maroon" role="alert">
+                        <div ng-message="required">Campo com tamanho insuficiente.</div>
+                    </div>
+                    <div ng-show="frmCreateUser.inputConfirm.$error.validator" style="color:maroon" role="alert">
+                        <div ng-message="required">As senhas não são iguais.</div>
+                    </div>
+                </div>
                 
-                <button class="btn btn-lg btn-primary btn-block" ng-click="create()" type="submit">Criar</button>
+                <button class="btn btn-lg btn-primary btn-block" ng-click="create()" ng-disabled="!frmCreateUser.$valid" 
+                    type="submit">Criar</button>
             </form>
         </form>
     </div>
