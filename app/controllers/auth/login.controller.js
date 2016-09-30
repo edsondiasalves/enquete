@@ -6,13 +6,23 @@ function LoginController($scope, firebaseFactory) {
         $scope.alerts.splice(index, 1);
     };
 
+    $scope.logoff = function () {
+        firebaseFactory.auth.$signOut();
+    }
+
+    $scope.bind = function () {
+        firebaseFactory.auth.$onAuthStateChanged(function (firebaseUser) {
+            $scope.isAuthenticated = firebaseUser != null;
+        });
+    }
+
     $scope.login = function () {
         firebaseFactory.auth.$signInWithEmailAndPassword($scope.inputEmail, $scope.inputPassword).then(function (firebaseUser) {
             $scope.alerts = [{ type: 'success', msg: 'Usuário autenticado com sucesso' }];
-            
+
             $scope.inputEmail = undefined;
             $scope.inputPassword = undefined;
-            
+
             $scope.frmLogin.$setPristine();
         }).catch(function (error) {
             var msg = 'Não foi possível realizar a autenticação';
@@ -25,4 +35,6 @@ function LoginController($scope, firebaseFactory) {
             $scope.alerts = [{ type: 'danger', msg: msg }];
         });
     }
+
+    $scope.bind();
 }

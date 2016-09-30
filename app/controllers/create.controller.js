@@ -11,15 +11,6 @@ function CreateController($scope, firebaseFactory) {
         ]
     };
 
-    // $scope.alerts = [
-    //     { type: 'danger', msg: 'Oh snap! Change a few things up and try submitting again.' },
-    //     { type: 'success', msg: 'Well done! You successfully read this important alert message.' }
-    // ];
-
-    $scope.addAlert = function () {
-        $scope.alerts.push({ msg: 'Another alert!' });
-    };
-
     $scope.closeAlert = function (index) {
         $scope.alerts.splice(index, 1);
     };
@@ -48,7 +39,7 @@ function CreateController($scope, firebaseFactory) {
             });
 
             enquetes.$add(novaEnquete).then(function (ref) {
-                $scope.alerts = [{ type:'success', msg: 'Enquete criada com sucesso!' }];
+                $scope.alerts = [{ type: 'success', msg: 'Enquete criada com sucesso!' }];
                 $scope.frmQuiz.$setPristine();
 
                 $scope.quiz = {
@@ -57,6 +48,10 @@ function CreateController($scope, firebaseFactory) {
                         { id: 2, desc: "" }
                     ]
                 };
+            }).catch(function(ref){
+                if (ref.code === "PERMISSION_DENIED"){
+                    $scope.alerts = [{ type: 'danger', msg: 'É necessário estar logado para criar enquetes' }];
+                }
             });
         }
     }

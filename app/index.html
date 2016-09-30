@@ -66,15 +66,18 @@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav" ng-controller="loginController">
                     <li>
                         <a ui-sref="create">Criar</a>
                     </li>
                     <li>
                         <a ui-sref="search">Procurar</a>
                     </li>
-                    <li>
+                    <li ng-hide="isAuthenticated">
                         <a ui-sref="login">Login</a>
+                    </li>
+                    <li ng-show="isAuthenticated">
+                        <a ng-click="logoff()">Logoff</a>
                     </li>
                 </ul>
             </div>
