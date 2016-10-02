@@ -29,6 +29,8 @@ function FirebaseFactory($firebaseObject, $firebaseArray, $firebaseAuth) {
     return {
         objQuizzes: objQuizzes,
         arrayQuizzes: arrayQuizzes, 
-        auth: auth
+        arrayVotes: arrayVotes,
+        auth: auth,
+        refVotes: refVotes
     };
 }    

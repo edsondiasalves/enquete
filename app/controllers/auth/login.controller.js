@@ -9,6 +9,7 @@ function LoginController($scope, authService) {
     $scope.onAuthStateChanged = function () {
         authService.onAuthStateChanged(function (firebaseUser) {
             $scope.isAuthenticated = firebaseUser != null;
+            $scope.$parent.user = firebaseUser;
         });
     }
 

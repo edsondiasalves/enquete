@@ -17,4 +17,8 @@ function AuthService(firebaseFactory) {
     this.onAuthStateChanged = function(a){
         return firebaseFactory.auth.$onAuthStateChanged(a);
     }
+
+    this.getAuth = function(){
+        return firebaseFactory.auth.$getAuth();
+    }
 }    
