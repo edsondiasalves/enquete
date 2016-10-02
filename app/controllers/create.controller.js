@@ -1,7 +1,7 @@
 angular.module('app')
-    .controller('createController', ['$scope', 'firebaseFactory', CreateController]);
+    .controller('createController', ['$scope', 'quizzesService', CreateController]);
 
-function CreateController($scope, firebaseFactory) {
+function CreateController($scope, quizzesService) {
     $scope.quiz = {
         title: '',
         description: '',
@@ -9,10 +9,6 @@ function CreateController($scope, firebaseFactory) {
             { id: 1, desc: "" },
             { id: 2, desc: "" }
         ]
-    };
-
-    $scope.closeAlert = function (index) {
-        $scope.alerts.splice(index, 1);
     };
 
     $scope.addOption = function () {
@@ -26,20 +22,8 @@ function CreateController($scope, firebaseFactory) {
 
     $scope.create = function () {
         if ($scope.frmQuiz.$valid) {
-            var enquetes = firebaseFactory.enquetesLista;
-            var novaEnquete =
-                {
-                    "title": $scope.quiz.title,
-                    "description": $scope.quiz.description,
-                    "options": []
-                };
-
-            angular.forEach($scope.quiz.options, function (v) {
-                novaEnquete.options.push(v.desc)
-            });
-
-            enquetes.$add(novaEnquete).then(function (ref) {
-                $scope.alerts = [{ type: 'success', msg: 'Enquete criada com sucesso!' }];
+            quizzesService.createQuiz($scope.quiz).then(function (ref) {
+                $scope.$parent.showSuccessMessage('Enquete criada com sucesso!');
                 $scope.frmQuiz.$setPristine();
 
                 $scope.quiz = {
@@ -50,7 +34,7 @@ function CreateController($scope, firebaseFactory) {
                 };
             }).catch(function(ref){
                 if (ref.code === "PERMISSION_DENIED"){
-                    $scope.alerts = [{ type: 'danger', msg: 'É necessário estar logado para criar enquetes' }];
+                    $scope.$parent.showDangerMessage('É necessário estar logado para criar enquetes');
                 }
             });
         }

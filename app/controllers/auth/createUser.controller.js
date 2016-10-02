@@ -1,23 +1,18 @@
 angular.module('app')
-    .controller('createUserController', ['$scope', 'firebaseFactory', CreateUserController]);
+    .controller('createUserController', ['$scope', 'authService', CreateUserController]);
 
-function CreateUserController($scope, firebaseFactory) {
-    $scope.closeAlert = function (index) {
-        $scope.alerts.splice(index, 1);
-    };
-
+function CreateUserController($scope, authService) {
     $scope.create = function () {
-
         if ($scope.inputPassword !== $scope.inputConfirm) {
-            $scope.alerts = [{ type: 'danger', msg: 'As senhas não são iguais' }];
+            $scope.$parent.showDangerMessage('As senhas não são iguais');
             return;
         }
 
         if ($scope.frmCreateUser.$valid) {
-            firebaseFactory.auth.$createUserWithEmailAndPassword($scope.inputEmail, $scope.inputPassword)
+            authService.createUserWithEmailAndPassword($scope.inputEmail, $scope.inputPassword)
                 .then(function (firebaseUser) {
-                    $scope.alerts = [{ type: 'success', msg: 'Usuário ' + $scope.inputEmail + ' criado com sucesso!' }];
-                    
+                    $scope.$parent.showSuccessMessage('Usuário ' + $scope.inputEmail + ' criado com sucesso!');
+
                     $scope.inputEmail = undefined;
                     $scope.inputPassword = undefined;
                     $scope.inputConfirm = undefined;
@@ -32,7 +27,7 @@ function CreateUserController($scope, firebaseFactory) {
                     else if (error.code === 'auth/too-many-requests')
                         msg = 'Número de tentativas de criação de usuário excedidas. Tente mais tarde';
 
-                    $scope.alerts = [{ type: 'danger', msg: msg }];
+                    $scope.$parent.showDangerMessage(msg);
                 });
         }
     }

@@ -1,40 +1,37 @@
 angular.module('app')
-    .controller('loginController', ['$scope', 'firebaseFactory', LoginController]);
+    .controller('loginController', ['$scope', 'authService', LoginController]);
 
-function LoginController($scope, firebaseFactory) {
-    $scope.closeAlert = function (index) {
-        $scope.alerts.splice(index, 1);
-    };
-
-    $scope.logoff = function () {
-        firebaseFactory.auth.$signOut();
+function LoginController($scope, authService) {
+    $scope.signOut = function () {
+        authService.signOut();
     }
 
-    $scope.bind = function () {
-        firebaseFactory.auth.$onAuthStateChanged(function (firebaseUser) {
+    $scope.onAuthStateChanged = function () {
+        authService.onAuthStateChanged(function (firebaseUser) {
             $scope.isAuthenticated = firebaseUser != null;
         });
     }
 
-    $scope.login = function () {
-        firebaseFactory.auth.$signInWithEmailAndPassword($scope.inputEmail, $scope.inputPassword).then(function (firebaseUser) {
-            $scope.alerts = [{ type: 'success', msg: 'Usuário autenticado com sucesso' }];
+    $scope.signInWithEmailAndPassword = function () {
+        authService.signInWithEmailAndPassword($scope.inputEmail, $scope.inputPassword)
+            .then(function (firebaseUser) {
+                $scope.$parent.showSuccessMessage('Usuário autenticado com sucesso');
 
-            $scope.inputEmail = undefined;
-            $scope.inputPassword = undefined;
+                $scope.inputEmail = undefined;
+                $scope.inputPassword = undefined;
 
-            $scope.frmLogin.$setPristine();
-        }).catch(function (error) {
-            var msg = 'Não foi possível realizar a autenticação';
-            console.log(error);
-            if (error.code === 'auth/wrong-password')
-                msg = 'A senha é inválida ou o usuário não possui uma senha.';
-            else if (error.code === 'auth/user-not-found')
-                msg = 'O usuário não existe ou a conta foi excluída';
+                $scope.frmLogin.$setPristine();
+            }).catch(function (error) {
+                var msg = 'Não foi possível realizar a autenticação';
+                console.log(error);
+                if (error.code === 'auth/wrong-password')
+                    msg = 'A senha é inválida ou o usuário não possui uma senha.';
+                else if (error.code === 'auth/user-not-found')
+                    msg = 'O usuário não existe ou a conta foi excluída';
 
-            $scope.alerts = [{ type: 'danger', msg: msg }];
-        });
+                $scope.$parent.showDangerMessage(msg);
+            });
     }
 
-    $scope.bind();
+    $scope.onAuthStateChanged();
 }

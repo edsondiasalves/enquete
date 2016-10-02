@@ -12,18 +12,23 @@ function FirebaseFactory($firebaseObject, $firebaseArray, $firebaseAuth) {
     firebase.initializeApp(config);
 
     var auth = $firebaseAuth();
+    
     var refData = firebase.database().ref();
-    var refEnquetes = firebase.database().ref().child('enquetes').child('quizzes');
+    var refQuizzes = firebase.database().ref().child('enquetes').child('quizzes');
+    var refVotes = firebase.database().ref().child('enquetes').child('votes');
 
-    var data = $firebaseObject(refData);
-    var dataLista = $firebaseArray(refData);
-    var enquetes = $firebaseObject(refEnquetes);
-    var enquetesLista = $firebaseArray(refEnquetes);
+    var objRoot = $firebaseObject(refData);
+    var arrayRoot = $firebaseArray(refData);
+    
+    var objQuizzes = $firebaseObject(refQuizzes);
+    var arrayQuizzes = $firebaseArray(refQuizzes);
+
+    var objVotes = $firebaseObject(refVotes);
+    var arrayVotes = $firebaseArray(refVotes);
 
     return {
-        dataLista: dataLista,
-        enquetes: enquetes,
-        enquetesLista: enquetesLista, 
+        objQuizzes: objQuizzes,
+        arrayQuizzes: arrayQuizzes, 
         auth: auth
     };
 }    

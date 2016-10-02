@@ -7,13 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta "content_security_policy":
+        "script-src 'self' https://apis.google.com https://www.googleapis.com https://securetoken.googleapis.com; object-src 'self'", "permissions": [ "https://*/*", "activeTab"]>
 
     <title>Enquete</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/ui-bootstrap-csp.css" rel="stylesheet">
-    
+
     <!-- Custom CSS -->
     <link href="assets/css/3-col-portfolio.css" rel="stylesheet">
     <link href="assets/css/custom.css" rel="stylesheet">
@@ -31,15 +33,21 @@
     <script src="app.module.js"></script>
     <script src="app.routes.js"></script>
 
+    <!-- Factories -->
+    <script src="factories/firebase.factory.js"></script>
+    <script src="factories/modal.factory.js"></script>
+
+    <!-- Services -->
+    <script src="services/quizzes.service.js"></script>
+    <script src="services/auth.service.js"></script>
+
     <!-- Controllers -->
+    <script src="controllers/main.controller.js"></script>
     <script src="controllers/home.controller.js"></script>
     <script src="controllers/create.controller.js"></script>
     <script src="controllers/vote.controller.js"></script>
     <script src="controllers/auth/login.controller.js"></script>
     <script src="controllers/auth/createUser.controller.js"></script>
-
-    <!-- Factories -->
-    <script src="factories/firebase.factory.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -77,7 +85,7 @@
                         <a ui-sref="login">Login</a>
                     </li>
                     <li ng-show="isAuthenticated">
-                        <a ng-click="logoff()">Logoff</a>
+                        <a ng-click="signOut()">Logoff</a>
                     </li>
                 </ul>
             </div>
@@ -87,19 +95,23 @@
     </nav>
 
     <!-- Page Content -->
-    <div class="container">
-
+    <div class="container"  ng-controller="mainController">
+        <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')"
+            style="margin-top:10px" 
+            dismiss-on-timeout="5000" close="closeAlert($index)">{{alert.msg}}
+        </div>
         <div ui-view></div>
+    </div>
 
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Enquete 2016</p>
-                </div>
+    <!-- Footer -->
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Copyright &copy; Enquete 2016</p>
             </div>
-            <!-- /.row -->
-        </footer>
+        </div>
+        <!-- /.row -->
+    </footer>
     </div>
     <!-- /.container -->
 </body>

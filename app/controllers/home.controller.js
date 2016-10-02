@@ -1,47 +1,33 @@
 angular.module('app')
-    .controller('homeController', ['$scope', 'firebaseFactory', '$uibModal', HomeController]);
+    .controller('homeController', ['$scope', 'quizzesService', 'modalFactory', HomeController]);
 
-function HomeController($scope, firebaseFactory, $uibModal) {
-
-    $scope.data = firebaseFactory.enquetes;
-
-    var unwatch = firebaseFactory.enquetes.$watch(function () {
-        $scope.loadData();
-    });
+function HomeController($scope, quizzesService, modalFactory) {
 
     $scope.loadData = function () {
-        firebaseFactory.enquetes.$loaded().then(function () {
-            $scope.quizzes = [];
-            angular.forEach(firebaseFactory.enquetes, function (fireQuiz, key) {
-                var i = 0;
-                var quiz = {
-                    "id": key,
-                    "title": fireQuiz.title,
-                    "description": fireQuiz.description,
-                    "options": fireQuiz.options
-                };
-                $scope.quizzes.push(quiz);
-            });
+        quizzesService.readQuizzes().then(function (quizzes) {
+            $scope.quizzes = quizzes;
         });
     }
 
     $scope.answer = function (selectedQuiz) {
-        var modalInstance = $uibModal.open({
-            ariaLabelledBy: 'modal-title',
-            ariaDescribedBy: 'modal-body',
-            templateUrl: 'views/vote.html',
-            controller: 'voteController',
-            controllerAs: 'vote',
-            resolve: {
-                quiz: function () {
-                    return selectedQuiz;
-                }
-            }
-        });
+        var modalInstance = modalFactory.open(
+            'views/vote.html',
+            'voteController',
+            selectedQuiz
+        );
 
-        modalInstance.result.then(function (selectedItem) {
-            console.log(selectedItem);
-        }, function () { });
+        modalInstance.result.then(function (vote) {
+            var option = vote.quiz.options[vote.selectedOption];
+            option.votes = (option.votes == undefined ? 1 : option.votes += 1);
+
+            quizzesService.voteQuiz(vote.quiz)
+                .then(function () {
+                    console.log('voted');
+                })
+                .catch(function (response) {
+                    console.log(response);
+                });
+        });
     }
 
     $scope.loadData();
