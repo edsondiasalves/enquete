@@ -17,7 +17,8 @@ function HomeController($scope, quizzesService, authService, votesService, modal
 
         modalInstance.result.then(function (vote) {
             var option = vote.quiz.options[vote.selectedOption];
-            option.votes = (option.votes == undefined ? 1 : option.votes += 1);
+            option.votes = $scope.increaseValue(option.votes);
+            vote.quiz.totalVotes = $scope.increaseValue(vote.quiz.totalVotes);
 
             var user = authService.getAuth().uid;
             var uservotequiz = {
@@ -45,6 +46,10 @@ function HomeController($scope, quizzesService, authService, votesService, modal
             msg = 'É necessário estar logado para opinar';
         }
         $scope.$parent.showDangerMessage(msg);
+    }
+
+    $scope.increaseValue = function(field){
+       return (field == undefined ? 1 : field += 1);
     }
 
     $scope.loadData();

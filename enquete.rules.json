@@ -1,12 +1,6 @@
 {
   "rules": {
   	".read":true,
-    "enquetes":{
-      ".read":true,
-			"quizzes":{
-        ".read":true,
-        ".write": "auth !== null"
-      }
-    } 
+    ".write": "auth !== null"
   }
 }
