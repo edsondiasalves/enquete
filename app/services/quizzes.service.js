@@ -3,6 +3,7 @@ angular.module('app').
 
 function QuizzesService(firebaseFactory, $firebaseArray) {
     this.createQuiz = function (quiz) {
+        quiz.creationDate = new Date().toLocaleString();
         return firebaseFactory.arrayQuizzes.$add(quiz);
     }
 

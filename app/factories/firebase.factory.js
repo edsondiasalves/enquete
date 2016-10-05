@@ -13,24 +13,20 @@ function FirebaseFactory($firebaseObject, $firebaseArray, $firebaseAuth) {
 
     var auth = $firebaseAuth();
     
-    var refData = firebase.database().ref();
     var refQuizzes = firebase.database().ref().child('enquetes').child('quizzes');
     var refVotes = firebase.database().ref().child('enquetes').child('votes');
 
-    var objRoot = $firebaseObject(refData);
-    var arrayRoot = $firebaseArray(refData);
-    
     var objQuizzes = $firebaseObject(refQuizzes);
+    var objVotes = $firebaseObject(refVotes);
+
     var arrayQuizzes = $firebaseArray(refQuizzes);
 
-    var objVotes = $firebaseObject(refVotes);
-    var arrayVotes = $firebaseArray(refVotes);
-
     return {
-        objQuizzes: objQuizzes,
-        arrayQuizzes: arrayQuizzes, 
-        arrayVotes: arrayVotes,
         auth: auth,
-        refVotes: refVotes
+        refVotes: refVotes,
+        arrayQuizzes: arrayQuizzes, 
+        getArray: function(ref){
+            return $firebaseArray(ref);
+        } 
     };
 }    

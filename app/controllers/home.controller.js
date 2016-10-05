@@ -20,13 +20,13 @@ function HomeController($scope, quizzesService, authService, votesService, modal
             option.votes = $scope.increaseValue(option.votes);
             vote.quiz.totalVotes = $scope.increaseValue(vote.quiz.totalVotes);
 
-            var user = authService.getAuth().uid;
-            var uservotequiz = {
+            var userVoteQuiz = {
+                user: authService.getAuth().uid,
                 quizId: vote.quiz.$id,
-                userOption: vote.selectedOption
+                selectedOption: vote.selectedOption
             }
 
-            votesService.createVoteUser(user, uservotequiz).then(function () {
+            votesService.createVoteUser(userVoteQuiz).then(function () {
                 quizzesService.voteQuiz(vote.quiz)
                     .then(function () {
                         $scope.$parent.showSuccessMessage('Voto computado com sucesso!');

@@ -1,11 +1,19 @@
 angular.module('app').
-    service('votesService', ['firebaseFactory', '$firebaseArray', VotesService]);
+    service('votesService', ['firebaseFactory', VotesService]);
 
-function VotesService(firebaseFactory, $firebaseArray) {
-    this.createVoteUser = function (user, voteUser) {
-        var refVotesUser = firebaseFactory.refVotes.child(user);
-        var arrayVotes = $firebaseArray(refVotesUser);
+function VotesService(firebaseFactory) {
+    this.createVoteUser = function (userVoteQuiz) {
+        //Navigate to firebase url: enquete/votes/{user}/{quiz}
+        var refVotesUser = firebaseFactory.refVotes
+            .child(userVoteQuiz.user)
+            .child(userVoteQuiz.quizId);
 
-        return arrayVotes.$add(voteUser);
+        var infoVote = {
+            selectedOption: userVoteQuiz.selectedOption,
+            date: new Date().toLocaleString()
+        };
+
+        var arrayVotes = firebaseFactory.getArray(refVotesUser);
+        return arrayVotes.$add(infoVote);
     }
 }    
