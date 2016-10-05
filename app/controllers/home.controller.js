@@ -9,6 +9,12 @@ function HomeController($scope, quizzesService, authService, votesService, modal
     }
 
     $scope.answer = function (selectedQuiz) {
+        var auth = authService.getAuth();
+        if (!auth) {
+            $scope.handleError({ code: "PERMISSION_DENIED" });
+            return;
+        }
+
         var modalInstance = modalFactory.open(
             'views/vote.html',
             'voteController',
@@ -21,7 +27,7 @@ function HomeController($scope, quizzesService, authService, votesService, modal
             vote.quiz.totalVotes = $scope.increaseValue(vote.quiz.totalVotes);
 
             var userVoteQuiz = {
-                user: authService.getAuth().uid,
+                user: auth == null ? '' : auth.uid,
                 quizId: vote.quiz.$id,
                 selectedOption: vote.selectedOption
             }
@@ -48,8 +54,8 @@ function HomeController($scope, quizzesService, authService, votesService, modal
         $scope.$parent.showDangerMessage(msg);
     }
 
-    $scope.increaseValue = function(field){
-       return (field == undefined ? 1 : field += 1);
+    $scope.increaseValue = function (field) {
+        return (field == undefined ? 1 : field += 1);
     }
 
     $scope.loadData();
