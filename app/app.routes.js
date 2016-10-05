@@ -17,6 +17,11 @@ angular.module('app')
                 templateUrl: 'views/create.html',
                 controller: 'createController'
             })
+             .state('search', {
+                url: '/search',
+                templateUrl: 'views/search.html',
+                controller: 'searchController'
+            })
             .state('login', {
                 url: '/login',
                 templateUrl: 'views/auth/login.html',

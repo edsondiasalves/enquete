@@ -21,8 +21,8 @@
                     <div ng-repeat="o in quiz.options">
                         <span ng-bind="o.desc"></span>
                         <uib-progressbar class="progress-striped" 
-                            value="o.votes" max="quiz.totalVotes" type="success">
-                            <span ng-bind="o.votes" ></span></uib-progressbar>
+                            value="o.votes == undefined ? 0 : o.votes" max="quiz.totalVotes == undefined ? 1 : quiz.totalVotes" type="success">
+                            <span ng-bind="o.votes == undefined ? 0 : o.votes" ></span></uib-progressbar>
                     </div>
                 </div>
             </div>
@@ -63,6 +63,4 @@
             </ul>
         </div>
     </div>
-    <!-- /.row -->
-    <hr>
 </div>
