@@ -102,7 +102,7 @@
     <div class="container">
         <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')"
             style="margin-top:10px" 
-            dismiss-on-timeout="5000" close="closeAlert($index)">{{alert.msg}}
+            dismiss-on-timeout="5000" close="closeAlert($index)"><span ng-bind="alert.msg"></span>
         </div>
         <div ui-view></div>
     </div>
