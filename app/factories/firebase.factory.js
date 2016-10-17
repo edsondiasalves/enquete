@@ -22,6 +22,9 @@ function FirebaseFactory($firebaseObject, $firebaseArray, $firebaseAuth) {
         refVotes: refVotes,
         getArray: function(ref){
             return $firebaseArray(ref);
+        } ,
+        getObject: function(ref){
+            return $firebaseObject(ref);
         } 
     };
 }    

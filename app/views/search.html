@@ -10,26 +10,10 @@
 
 	<!-- Projects Row -->
 	<div class="row">
-		<div class="col-md-6 portfolio-item">
+		<div class="col-md-12 portfolio-item">
 			Pesquisar:
 			<input class="form-control" ng-model="searchkey" type="text" ng-change="search()" />
 		</div>
 	</div>
-
-	<div class="row">
-		<div ng-repeat="quiz in quizzes">
-			<div class="col-md-4">
-				<h3><span ng-bind="quiz.title"></span></h3>
-				<p><strong><span ng-bind="quiz.description"></span><strong></p>
-                <div class="">
-                    <div ng-repeat="o in quiz.options">
-                        <span ng-bind="o.desc"></span>
-                        <uib-progressbar class="progress-striped" 
-                            value="o.votes == undefined ? 0 : o.votes" max="quiz.totalVotes == undefined ? 1 : quiz.totalVotes" type="success">
-                            <span ng-bind="o.votes == undefined ? 0 : o.votes" ></span></uib-progressbar>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div ng-model="quizzes" quizzes-directive></div>
 </div>

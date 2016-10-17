@@ -3,15 +3,15 @@ angular.module('app')
 
 function SearchController($scope, quizzesService, votesService, authService, modalFactory) {
     $scope.search = function () {
-        var response = quizzesService.readQuiz($scope.searchkey);
-        if (response) {
-            response.then(function (snap) {
-                if (snap.exists()) {
-                    $scope.quizzes = snap.val();
-                }
-            });
-        }else{
-            $scope.quizzes = null;
+
+        if (!$scope.searchkey) {
+            $scope.quizzes = undefined;
+            return;
         }
+
+        var response = quizzesService.searchQuizzes($scope.searchkey)
+            .then(function (quizzes) {
+                $scope.quizzes = quizzes;
+            });
     }
 }

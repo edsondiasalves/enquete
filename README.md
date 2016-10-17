@@ -11,18 +11,18 @@
 
 ## Usage
 
-**Enquete** is the simple way to make small researches when the user can create and opinate whatever subject they 
-want. The results and changes are showed in real time
-It is possible to search and check the result for the quizzes, but for those resources is needed to create an account
-and sign in.
-The app uses the firebase platform and are writing using AngularJs.
-Currently the app are deployed at this  [test server](https://enquete-ba752.firebaseapp.com/) is maintained by me.
+**Enquete** is the simple way to make small researches, the user can create and opinate whatever subject they 
+want. The quizzes, results and changes are showed in real time
+It is possible to search and check the result for all quizzes, but for create or opinate is needed to create an
+ account and sign in.
+The app uses the firebase platform and we are using AngularJs in the frontend.
+Currently the app is deployed at this [test server](https://enquete-ba752.firebaseapp.com/) is maintained by me.
 Feel free to fork it and collaborate.
 
 ## Sources
 
 * `npm` - dependencies from [NPM](http://npmjs.org/)
-* `github` - dependencies directly from [GitHub](https://github.com/) (E.g. [Duo](http://duojs.org/), [JSPM](http://jspm.io/))
+* `github` - dependencies directly from [GitHub](https://github.com/) 
 * `bower` - dependencies from [Bower](http://bower.io/)
 
 ## Contributing

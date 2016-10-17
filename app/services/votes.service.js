@@ -6,7 +6,7 @@ function VotesService(firebaseFactory) {
     this.createVoteUser = function (userVoteQuiz) {
         //Navigate to firebase url: enquete/votes/{user}/{quiz}
         var refVotesUser = firebaseFactory.refVotes
-            .child(userVoteQuiz.user)
+            .child(firebaseFactory.auth.$getAuth().uid)
             .child(userVoteQuiz.quizId);
         var arrayVotes = firebaseFactory.getArray(refVotesUser);
 

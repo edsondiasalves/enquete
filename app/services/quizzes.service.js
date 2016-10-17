@@ -6,28 +6,36 @@ function QuizzesService(firebaseFactory, $firebaseArray) {
 
     this.createQuiz = function (quiz) {
         quiz.creationDate = new Date().toLocaleString();
+        quiz.author = firebaseFactory.auth.$getAuth().uid;
         return arrayQuizzes.$add(quiz);
     }
 
-    this.readQuiz = function (text) {
+    this.searchQuizzes = function (text) {
         if (!text)
             return null;
-        
-        return firebaseFactory.refQuizzes
+
+        var ref = firebaseFactory.refQuizzes
             .orderByChild('title')
             .startAt(text)
-            .limitToFirst(30)
-            .once('value');
-    }
+            .limitToFirst(30);
 
-    this.readQuizzes = function () {        
+        var arrayQuizzes = firebaseFactory.getArray(ref);
         return arrayQuizzes.$loaded();
     }
 
-    this.voteQuiz = function (quiz) {
-        return arrayQuizzes.$save(quiz);
+    this.readQuizz = function (id) {    
+        var ref = firebaseFactory.refQuizzes.child(id);
+        return firebaseFactory.getObject(ref).$loaded();
     }
 
-    this.deleteQuiz = function () {
+    this.readQuizzes = function () {
+        return arrayQuizzes.$loaded();
     }
-}    
+
+    this.updateQuizz = function(quiz){
+        return quiz.$save();
+    }
+
+    this.deleteQuiz = function (quiz) {
+    }
+}

@@ -1,0 +1,22 @@
+<div class="row">
+	<div class="col-md-6 portfolio-item" ng-repeat="quiz in quizzes">
+            <div class="col-md-12">
+                <h3><span ng-bind="quiz.title"></span></h3>
+                <p><strong><span ng-bind="quiz.description"></span><strong></p>
+                <br />
+            </div>
+            <div>
+                <div class="col-md-12">
+                    <div ng-repeat="o in quiz.options">
+                        <span ng-bind="o.desc"></span>
+                        <uib-progressbar class="progress-striped" 
+                            value="o.votes == undefined ? 0 : o.votes" max="quiz.votes == undefined ? 1 : quiz.votes" type="success">
+                            <span ng-bind="o.votes == undefined ? 0 : o.votes" ></span></uib-progressbar>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 text-right">
+                <button class="btn btn-primary" ng-click='answer(quiz)'>Responder</button>
+            </div>
+        </div>
+</div>
