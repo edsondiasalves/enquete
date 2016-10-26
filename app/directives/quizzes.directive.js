@@ -59,6 +59,11 @@ function QuizzesDirective(quizzesService, authService, votesService, modalFactor
                 });
             }
 
+            scope.delete = function(quiz){
+                quizzesService.deleteQuiz(quiz);
+                scope.$parent.showSuccessMessage('Quiz excluído com sucesso!');
+            }
+
             scope.handleError = function (ref) {
                 var msg = 'Um erro ocorreu tente mais tarde!'
                 if (ref.code === "PERMISSION_DENIED") {

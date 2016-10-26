@@ -15,11 +15,13 @@ function FirebaseFactory($firebaseObject, $firebaseArray, $firebaseAuth) {
     
     var refQuizzes = firebase.database().ref().child('enquetes').child('quizzes');
     var refVotes = firebase.database().ref().child('enquetes').child('votes');
+    var refExcludes = firebase.database().ref().child('enquetes').child('excludes');
 
     return {
         auth: auth,
         refQuizzes: refQuizzes, 
         refVotes: refVotes,
+        refExcludes: refExcludes,
         getArray: function(ref){
             return $firebaseArray(ref);
         } ,

@@ -16,11 +16,11 @@ function QuizzesService(firebaseFactory, $firebaseArray) {
 
         var ref = firebaseFactory.refQuizzes
             .orderByChild('title')
-            .startAt(text)
+            .equalTo(text)
             .limitToFirst(30);
 
-        var arrayQuizzes = firebaseFactory.getArray(ref);
-        return arrayQuizzes.$loaded();
+        var myArrayQuizzes = firebaseFactory.getArray(ref);
+        return myArrayQuizzes.$loaded();
     }
 
     this.readQuizz = function (id) {    
@@ -29,7 +29,13 @@ function QuizzesService(firebaseFactory, $firebaseArray) {
     }
 
     this.readQuizzes = function () {
-        return arrayQuizzes.$loaded();
+        var ref = firebaseFactory.refQuizzes
+            .orderByChild('votes')
+            .limitToFirst(30);
+
+        var myArrayQuizzes = firebaseFactory.getArray(ref);
+
+        return myArrayQuizzes.$loaded();
     }
 
     this.updateQuizz = function(quiz){
@@ -37,5 +43,12 @@ function QuizzesService(firebaseFactory, $firebaseArray) {
     }
 
     this.deleteQuiz = function (quiz) {
+        var refQuiz = firebaseFactory.refQuizzes.child(quiz.$id);
+        
+        var refUserExcludes = firebaseFactory.refExcludes.child(firebaseFactory.auth.$getAuth().uid);
+        var arrayUserExcludes = firebaseFactory.getArray(refUserExcludes);
+        
+        arrayUserExcludes.$add(quiz.$id);
+        refQuiz.remove();
     }
 }
