@@ -1,7 +1,7 @@
 angular.module('app')
-    .controller('homeController', ['$scope', 'quizzesService', 'authService', 'votesService', 'modalFactory', HomeController]);
+    .controller('homeController', ['$scope', 'quizzesService', HomeController]);
 
-function HomeController($scope, quizzesService, authService, votesService, modalFactory) {
+function HomeController($scope, quizzesService) {
     $scope.loadData = function () {
         quizzesService.readQuizzes().then(function (quizzes) {
             $scope.quizzes = quizzes;

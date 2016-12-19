@@ -22,21 +22,22 @@ function CreateController($scope, quizzesService) {
 
     $scope.create = function () {
         if ($scope.frmQuiz.$valid) {
-            quizzesService.createQuiz($scope.quiz).then(function (ref) {
-                $scope.$parent.showSuccessMessage('Enquete criada com sucesso!');
-                $scope.frmQuiz.$setPristine();
+            quizzesService.createQuiz($scope.quiz)
+                .then(function (ref) {
+                    $scope.$parent.showSuccessMessage('Enquete criada com sucesso!');
+                    $scope.frmQuiz.$setPristine();
 
-                $scope.quiz = {
-                    options: [
-                        { id: 1, desc: "" },
-                        { id: 2, desc: "" }
-                    ]
-                };
-            }).catch(function(ref){
-                if (ref.code === "PERMISSION_DENIED"){
-                    $scope.$parent.showDangerMessage('É necessário estar logado para criar enquetes');
-                }
-            });
+                    $scope.quiz = {
+                        options: [
+                            { id: 1, desc: "" },
+                            { id: 2, desc: "" }
+                        ]
+                    };
+                }).catch(function (ref) {
+                    if (ref.code === "PERMISSION_DENIED") {
+                        $scope.$parent.showDangerMessage('É necessário estar logado para criar enquetes');
+                    }
+                });
         }
     }
 }
