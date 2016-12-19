@@ -24,6 +24,7 @@ module.exports = function (config) {
       'node_modules/angularfire/dist/angularfire.js',
       'app/app.module.js',
       'app/controllers/**/*.js',
+      'app/services/**/*.js',
       'test/**/*.*'     
     ],
 
