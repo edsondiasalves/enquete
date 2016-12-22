@@ -20,6 +20,10 @@
             "args": ["test"]
         },
         {
+            "taskName": "eslint",
+            "args": ["run", "eslint"]
+        },
+        {
             "taskName": "start",
             "args": ["start"],
             "isBuildCommand": true

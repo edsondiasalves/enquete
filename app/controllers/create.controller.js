@@ -23,7 +23,7 @@ function CreateController($scope, quizzesService) {
     $scope.create = function () {
         if ($scope.frmQuiz.$valid) {
             quizzesService.createQuiz($scope.quiz)
-                .then(function (ref) {
+                .then(function () {
                     $scope.$parent.showSuccessMessage('Enquete criada com sucesso!');
                     $scope.frmQuiz.$setPristine();
 
