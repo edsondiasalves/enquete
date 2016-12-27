@@ -1,7 +1,7 @@
 angular.module('app').
     service('quizzesService', ['firebaseFactory', QuizzesService]);
 
-function QuizzesService(firebaseFactory, $firebaseArray) {
+function QuizzesService(firebaseFactory) {
     var arrayQuizzes = firebaseFactory.getArray(firebaseFactory.refQuizzes);
 
     this.createQuiz = function (quiz) {

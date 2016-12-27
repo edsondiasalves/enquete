@@ -1,5 +1,6 @@
 describe('createController', function () {
     var $scope = {};
+    var $httpBackend;
     var $q;
     var deferred;
     var quizzesService;
@@ -9,20 +10,24 @@ describe('createController', function () {
     beforeEach(inject(function () {
         quizzesService = {
             createQuiz: function () {
-                deferred = $q.defer();
-
-                deferred.resolve({});
-                return deferred.promise;
             }
         };
     }));
 
-    beforeEach(inject(function ($controller, _$rootScope_, _$q_) {
+    beforeEach(inject(function (_$rootScope_, _$q_, $controller) {
         $scope = _$rootScope_.$new();
+        $scope.$parent.showSuccessMessage = function () { };
+        $scope.frmQuiz = {
+            $valid: true,
+            $setPristine: function () { }
+        };
+        $scope.quiz = {};
+
         $q = _$q_;
+        deferred = $q.defer();
+
         $controller('createController', { $scope: $scope, quizzesService: quizzesService });
     }));
-
 
     describe('addOption', function () {
         it('try to add an option', function () {
@@ -38,10 +43,31 @@ describe('createController', function () {
 
     describe('create', function () {
         it('try to create an option', function () {
-            $scope.frmQuiz = {
-                $valid: true
-            };
+
+            spyOn(quizzesService, 'createQuiz').and.callFake(function () {
+                deferred.resolve({});
+                return deferred.promise;
+            });
+
             $scope.create();
+            $scope.$apply();
+
+            expect(quizzesService.createQuiz).toHaveBeenCalled();
+            expect($scope.quiz.options.length).toBe(2);
+        })
+    })
+
+    describe('create', function () {
+        it('failing the creation of an option', function () {
+
+            spyOn(quizzesService, 'createQuiz').and.callFake(function () {
+                return  Promise.reject({code: "PERMISSION_DENIED"});
+            });
+
+            $scope.create();
+            $scope.$apply();
+
+            expect(quizzesService.createQuiz).toHaveBeenCalled();
         })
     })
 });
