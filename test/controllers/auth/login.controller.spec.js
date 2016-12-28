@@ -11,7 +11,9 @@ describe('loginController', function () {
             onAuthStateChanged: function () {
                 deferred = $q.defer();
 
-                deferred.resolve({});
+                deferred.resolve({
+                    firebaseUser:function(){}
+                });
                 return deferred.promise;
             },
             signOut: function () {
@@ -21,10 +23,7 @@ describe('loginController', function () {
                 return deferred.promise;
             },
             signInWithEmailAndPassword: function () {
-                deferred = $q.defer();
 
-                deferred.resolve({});
-                return deferred.promise;
             }
         };
     }));
@@ -44,12 +43,56 @@ describe('loginController', function () {
     describe('onAuthStateChanged', function () {
         it('set control information when the auth state changes', function () {
             $scope.onAuthStateChanged();
+            $scope.$apply();
         })
     })
 
     describe('signInWithEmailAndPassword', function () {
         it('sign an user in using email and password', function () {
+            $scope.inputEmail = 'a@b.com';
+            $scope.inputPassword = 'password';
+            $scope.$parent.showSuccessMessage = function () { };
+            $scope.frmLogin = {
+                $setPristine: function () { }
+            };
+
+            spyOn(authService, 'signInWithEmailAndPassword').and.callFake(function () {
+                deferred.resolve({});
+                return deferred.promise;
+            });
+
             $scope.signInWithEmailAndPassword();
+            $scope.$apply();
+        })
+    })
+
+    describe('signInWithEmailAndPassword', function () {
+        it('get an auth/wrong-password error when trying to sign an user in using email and password', function () {
+            $scope.inputEmail = 'a@b.com';
+            $scope.inputPassword = 'password';
+            $scope.$parent.showSuccessMessage = function () { };
+
+            spyOn(authService, 'signInWithEmailAndPassword').and.callFake(function () {
+                return Promise.reject({ code: 'auth/wrong-password' });
+            });
+
+            $scope.signInWithEmailAndPassword();
+            $scope.$apply();
+        })
+    })
+
+    describe('signInWithEmailAndPassword', function () {
+        it('get an auth/user-not-found error when trying to sign an user in using email and password', function () {
+            $scope.inputEmail = 'a@b.com';
+            $scope.inputPassword = 'password';
+            $scope.$parent.showSuccessMessage = function () { };
+
+            spyOn(authService, 'signInWithEmailAndPassword').and.callFake(function () {
+                return Promise.reject({ code: 'auth/user-not-found' });
+            });
+
+            $scope.signInWithEmailAndPassword();
+            $scope.$apply();
         })
     })
 });

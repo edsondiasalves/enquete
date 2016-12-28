@@ -27,6 +27,17 @@ describe('searchController', function () {
         it('try to search data', function () {
             $scope.searchkey = 'abc';
             $scope.search();
+
+            $scope.$apply();
+        })
+    })
+
+    describe('search', function () {
+        it('return when try to search data without params', function () {
+            $scope.searchkey = false;
+            $scope.search();
+
+            $scope.$apply();
         })
     })
 });

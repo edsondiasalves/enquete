@@ -12,6 +12,7 @@
   "license": "ISC",
   "devDependencies": {
     "angular-mocks": "^1.6.0",
+    "babel-polyfill": "^6.20.0",
     "bower": "^1.7.9",
     "eslint": "^3.12.2",
     "grunt": "^1.0.1",

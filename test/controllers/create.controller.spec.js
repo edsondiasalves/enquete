@@ -1,6 +1,5 @@
 describe('createController', function () {
     var $scope = {};
-    var $httpBackend;
     var $q;
     var deferred;
     var quizzesService;
@@ -17,6 +16,8 @@ describe('createController', function () {
     beforeEach(inject(function (_$rootScope_, _$q_, $controller) {
         $scope = _$rootScope_.$new();
         $scope.$parent.showSuccessMessage = function () { };
+        $scope.$parent.showDangerMessage = function () { };
+        
         $scope.frmQuiz = {
             $valid: true,
             $setPristine: function () { }
