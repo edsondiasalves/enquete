@@ -70,7 +70,7 @@ describe('loginController', function () {
         it('get an auth/wrong-password error when trying to sign an user in using email and password', function () {
             $scope.inputEmail = 'a@b.com';
             $scope.inputPassword = 'password';
-            $scope.$parent.showSuccessMessage = function () { };
+            $scope.$parent.showDangerMessage = function () { };
 
             spyOn(authService, 'signInWithEmailAndPassword').and.callFake(function () {
                 return Promise.reject({ code: 'auth/wrong-password' });
@@ -85,7 +85,7 @@ describe('loginController', function () {
         it('get an auth/user-not-found error when trying to sign an user in using email and password', function () {
             $scope.inputEmail = 'a@b.com';
             $scope.inputPassword = 'password';
-            $scope.$parent.showSuccessMessage = function () { };
+            $scope.$parent.showDangerMessage = function () { };
 
             spyOn(authService, 'signInWithEmailAndPassword').and.callFake(function () {
                 return Promise.reject({ code: 'auth/user-not-found' });

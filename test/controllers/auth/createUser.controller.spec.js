@@ -41,6 +41,7 @@ describe('createUserController', function () {
             $scope.inputConfirm = 'equal';
 
             $scope.$parent.showSuccessMessage = function (a) { };
+            $scope.$parent.showDangerMessage = function (a) { };
 
             spyOn(authService, 'createUserWithEmailAndPassword').and.callFake(function () {
                 deferred.resolve({});
@@ -62,7 +63,7 @@ describe('createUserController', function () {
             $scope.inputPassword = 'equal';
             $scope.inputConfirm = 'equal';
 
-            $scope.$parent.showSuccessMessage = function (a) { };
+            $scope.$parent.showDangerMessage = function (a) { };
 
             spyOn(authService, 'createUserWithEmailAndPassword').and.callFake(function () {
                 return Promise.reject({ code: 'auth/email-already-in-use' });
@@ -83,7 +84,7 @@ describe('createUserController', function () {
             $scope.inputPassword = 'equal';
             $scope.inputConfirm = 'equal';
 
-            $scope.$parent.showSuccessMessage = function (a) { };
+            $scope.$parent.showDangerMessage = function (a) { };
 
             spyOn(authService, 'createUserWithEmailAndPassword').and.callFake(function () {
                 return Promise.reject({ code: 'auth/operation-not-allowed' });
@@ -104,7 +105,7 @@ describe('createUserController', function () {
             $scope.inputPassword = 'equal';
             $scope.inputConfirm = 'equal';
 
-            $scope.$parent.showSuccessMessage = function (a) { };
+            $scope.$parent.showDangerMessage = function (a) { };
 
             spyOn(authService, 'createUserWithEmailAndPassword').and.callFake(function () {
                 return Promise.reject({ code: 'auth/too-many-requests' });
