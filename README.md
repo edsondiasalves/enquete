@@ -1,10 +1,5 @@
 # Enquete
 
-[![NPM version][npm-image]][npm-url]
-[![NPM downloads][downloads-image]][downloads-url]
-[![Build status][travis-image]][travis-url]
-[![Gitter][gitter-image]][gitter-url]
-
 > A simple quizzes app.
 
 ## Quick Start
