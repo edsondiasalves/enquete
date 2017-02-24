@@ -12,7 +12,7 @@ It is possible to search and check the result for all quizzes, but for create or
  account and sign in.
 The app uses the firebase platform and we are using AngularJs in the frontend.
 Currently the app is deployed at this [test server](https://enquete-ba752.firebaseapp.com/) is maintained by me.
-Feel free to fork it and collaborate.
+Feel free to fork it and collaborate..
 
 ## Sources
 
