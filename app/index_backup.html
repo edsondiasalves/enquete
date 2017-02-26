@@ -13,9 +13,48 @@
 	<title>Enquete</title>
 
 	<!-- Bootstrap Core CSS -->
-	<link href="styles/base.css" rel="stylesheet">
-	<script src="scripts/base.js"></script>
-	<script src="scripts/components.js"></script>
+	<link href="assets/css/bootstrap.min.css" rel="stylesheet">
+	<link href="assets/css/ui-bootstrap-csp.css" rel="stylesheet">
+
+	<!-- Custom CSS -->
+	<link href="assets/css/3-col-portfolio.css" rel="stylesheet">
+	<link href="assets/css/custom.css" rel="stylesheet">
+
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/angular.min.js"></script>
+	<script src="assets/js/angular-route.min.js"></script>
+	<script src="assets/js/angular-ui-router.min.js"></script>
+	<script src="assets/js/ui-bootstrap-tpls.js"></script>
+	<script src="assets/js/validate.min.js"></script>
+
+	<script src="assets/js/firebase.js"></script>
+	<script src="assets/js/angularfire.min.js"></script>
+
+	<!-- Modules -->
+	<script src="app.module.js"></script>
+	<script src="app.routes.js"></script>
+
+	<!-- Factories -->
+	<script src="factories/firebase.factory.js"></script>
+	<script src="factories/modal.factory.js"></script>
+
+	<!-- Services -->
+	<script src="services/quizzes.service.js"></script>
+	<script src="services/votes.service.js"></script>
+	<script src="services/auth.service.js"></script>
+
+	<!-- Controllers -->
+	<script src="controllers/main.controller.js"></script>
+	<script src="controllers/home.controller.js"></script>
+	<script src="controllers/create.controller.js"></script>
+	<script src="controllers/search.controller.js"></script>
+	<script src="controllers/vote.controller.js"></script>
+	<script src="controllers/auth/login.controller.js"></script>
+	<script src="controllers/auth/createUser.controller.js"></script>
+
+	<!-- Directives -->
+	<script src="directives/quizzes.directive.js"></script>
 
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -23,6 +62,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
 </head>
 
 <body ng-app="app" ng-controller="mainController">
