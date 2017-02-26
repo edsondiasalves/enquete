@@ -1,6 +1,9 @@
 var gulp = require('gulp');
 var del = require('del');
 var concat = require('gulp-concat');
+var eslint = require('gulp-eslint');
+var htmlReplace = require('gulp-html-replace');
+
 var dirBaseStyles = ['app/assets/css/'];
 var dirBaseFonts = ['app/assets/fonts/'];
 var dirBaseScripts = ['app/assets/js/'];
@@ -10,6 +13,17 @@ var dirOutputScripts = 'publish/app/scripts';
 var dirOutputViews = 'publish/app/views';
 
 gulp.task('default', function () {
+});
+
+gulp.task('lint', function () {
+    return gulp.src(['app/**/*.js'])
+        .pipe(eslint())
+        // eslint.format() outputs the lint results to the console.
+        // Alternatively use eslint.formatEach() (see Docs).
+        .pipe(eslint.format('table', process.stdout))
+        // To have the process exit with an error code (1) on
+        // lint error, return the stream and pipe to failAfterError last.
+        .pipe(eslint.failAfterError());
 });
 
 gulp.task('publish', [
@@ -22,7 +36,7 @@ gulp.task('publish', [
 ], function () {
 });
 
-gulp.task('clean-publish', function () {
+gulp.task('clean-publish', ['lint'], function () {
     return del('publish');
 });
 
@@ -83,6 +97,11 @@ gulp.task('publish-views', ['clean-publish'], function () {
 
 gulp.task('publish-index', ['clean-publish'], function () {
     var stream = gulp.src('app/index.html')
+        .pipe(htmlReplace({
+            'css': 'styles/base.css',
+            'jsbase': 'scripts/base.js',
+            'jscomponents': 'scripts/components.js'
+        }))
         .pipe(gulp.dest('publish/app'));
     return stream;
 });
