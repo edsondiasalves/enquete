@@ -1,3 +1,4 @@
+(function(){
 angular.module('app')
     .controller('homeController', ['$scope', 'quizzesService', HomeController]);
 
@@ -10,3 +11,4 @@ function HomeController($scope, quizzesService) {
 
     $scope.loadData();
 }
+})();

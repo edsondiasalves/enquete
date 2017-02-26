@@ -3,7 +3,8 @@ module.exports = {
         "browser": true
     },
     "globals":{
-        "angular":true
+        "angular":true,
+        "firebase":true
     },
     "extends": "eslint:recommended",
     "rules": {
@@ -45,7 +46,7 @@ module.exports = {
         "dot-notation": [
             "error",
             {
-                "allowKeywords": false
+                "allowKeywords": true
             }
         ],
         "eol-last": "off",

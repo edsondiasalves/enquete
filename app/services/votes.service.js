@@ -1,3 +1,4 @@
+(function(){
 angular.module('app').
     service('votesService', ['firebaseFactory', VotesService]);
 
@@ -14,7 +15,7 @@ function VotesService(firebaseFactory) {
             selectedOption: userVoteQuiz.selectedOption,
             date: new Date().toLocaleString()
         };
-
         return arrayVotes.$add(infoVote);
     }
-}    
+}
+})();

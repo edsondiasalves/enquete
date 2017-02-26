@@ -1,3 +1,4 @@
+(function(){
 angular.module('app').
     service('authService', ['firebaseFactory', AuthService]);
 
@@ -21,4 +22,5 @@ function AuthService(firebaseFactory) {
     this.getAuth = function(){
         return firebaseFactory.auth.$getAuth();
     }
-}    
+}
+})();

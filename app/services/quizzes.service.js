@@ -1,9 +1,9 @@
+(function(){
 angular.module('app').
     service('quizzesService', ['firebaseFactory', QuizzesService]);
 
 function QuizzesService(firebaseFactory) {
     var arrayQuizzes = firebaseFactory.getArray(firebaseFactory.refQuizzes);
-
     this.createQuiz = function (quiz) {
         quiz.creationDate = new Date().toLocaleString();
         quiz.author = firebaseFactory.auth.$getAuth().uid;
@@ -34,7 +34,6 @@ function QuizzesService(firebaseFactory) {
             .limitToFirst(30);
 
         var myArrayQuizzes = firebaseFactory.getArray(ref);
-
         return myArrayQuizzes.$loaded();
     }
 
@@ -44,11 +43,10 @@ function QuizzesService(firebaseFactory) {
 
     this.deleteQuiz = function (quiz) {
         var refQuiz = firebaseFactory.refQuizzes.child(quiz.$id);
-        
         var refUserExcludes = firebaseFactory.refExcludes.child(firebaseFactory.auth.$getAuth().uid);
         var arrayUserExcludes = firebaseFactory.getArray(refUserExcludes);
-        
         arrayUserExcludes.$add(quiz.$id);
         refQuiz.remove();
     }
 }
+})();
