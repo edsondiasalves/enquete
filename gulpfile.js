@@ -3,6 +3,8 @@ var del = require('del');
 var concat = require('gulp-concat');
 var eslint = require('gulp-eslint');
 var htmlReplace = require('gulp-html-replace');
+var Server = require('karma').Server;
+var sequence = require('gulp-sequence');
 
 var dirBaseStyles = ['app/assets/css/'];
 var dirBaseFonts = ['app/assets/fonts/'];
@@ -15,6 +17,11 @@ var dirOutputViews = 'publish/app/views';
 gulp.task('default', function () {
 });
 
+gulp.task('publish', function () {
+    sequence('lint', 'test', 'publish-app', function () {
+    })
+});
+
 gulp.task('lint', function () {
     return gulp.src(['app/**/*.js'])
         .pipe(eslint())
@@ -22,7 +29,15 @@ gulp.task('lint', function () {
         .pipe(eslint.failAfterError());
 });
 
-gulp.task('publish', [
+gulp.task('test', function (done) {
+    new Server({
+        configFile: __dirname + '/karma.conf.js',
+        singleRun: true,
+        reporters: ['dots', 'coverage']
+    }, done).start();
+});
+
+gulp.task('publish-app', [
     'publish-styles',
     'publish-fonts',
     'publish-scripts',
@@ -32,7 +47,7 @@ gulp.task('publish', [
 ], function () {
 });
 
-gulp.task('clean-publish', ['lint'], function () {
+gulp.task('clean-publish', function () {
     return del('publish');
 });
 

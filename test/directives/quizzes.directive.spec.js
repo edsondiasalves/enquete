@@ -14,23 +14,24 @@ describe('quizzesDirective', function () {
         $compile(element)(scope);
         scope.$digest();
     }));
-    // beforeEach(function () {
-    //     module(function ($provide) {
-    //         $provide.value('quizzesService', quizzesService);
-    //         $provide.value('authService', authService);
-    //         $provide.value('votesService', votesService);
-    //         $provide.value('modalFactory', modalFactory);
-    //     });
-    // });
+    
+    beforeEach(function () {
+        module(function ($provide) {
+            $provide.value('quizzesService', quizzesService);
+            $provide.value('authService', authService);
+            $provide.value('votesService', votesService);
+            $provide.value('modalFactory', modalFactory);
+        });
+    });
 
-    // beforeEach(inject(function (_quizzesDirective_) {
-    //     quizzesDirective = _quizzesDirective_;
-    // }));
+    beforeEach(inject(function (_quizzesDirective_) {
+        quizzesDirective = _quizzesDirective_;
+    }));
 
-    describe('quizzesDirective', function () {
-        it('load the directive', function () {
-            console.log(element);
-            expect(true).toBe(true);
-        })
-    })
+    // describe('quizzesDirective', function () {
+    //     it('load the directive', function () {
+    //         console.log(element);
+    //         expect(true).toBe(true);
+    //     })
+    // })
 });
